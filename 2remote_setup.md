@@ -27,15 +27,13 @@ Each of these are to be used internally throughout this process or used as a tem
 Next you will need to access the netplan of your device and alter it in order to recognize the switchboard and create a Local Area Network (LAN) connection with the AWOW remote PC. This is possible with the following code: 
 ```bash
 sudo nano /etc/netplan/*.yaml. 
+``` 
+Now that we are into the network configuration, erase what is currently present in the terminal, and paste the contents of the ```01-network-manager-all.yaml``` file we just made previously. Note that, for our design, the ethernet ports of interest are enp1 and enp2, enp1 being for the organizational internet connection and should be the IP address of the remote device, and enp2 for the switchboard reading "10.1.1.243" that can be left alone unless you personally would like it to read differently. Next is to change the contents of the enp1 and enp2 listings to your system's IP address, gateway, and nameservers. If you are unsure what the necessary elements are to be changed to, you can find them in the default files we created above at the beginning with the second grouping of codes such as defaultIPaddress.conf, defaultDNS.conf, and ipRoute.conf. The 'to' and 'metric' locations can be left the same, while your 'via' is to be changed to your gateway and the namesaver to your namesaver.  
+
+After saving the changes with ctrl+x to exit and y to save, enter the following code to update it to the settings specified: 
+```bash
+sudo netplan apply.  
 ```
-Update:  
-Now that we are into the network configuration, erase what is currently present in the terminal, and paste the contents of the 01-network-manager-all.yaml file we just made previously. 
-Note that, the enp6 and enp5 are specific to the creator's set up and the numbers need to be changed to your organization’s configuration. 
-For our design the ethernet ports of interest are enp1 and enp2, enp1 being for the organizational internet connection and should be the IP address of the AWOW remote device, and enp2 for the switchboard, and as the protocol on github mentions, can be left alone and assigned as 10.1.1.243 unless you personally would like it to read differently.
-Next is to change the contents of the enp1 and enp2 listings to our system's IP address, gateway, and nameservers. 
-A recent change to the netplan configuration is that gateways is no longer "routes" as shown in the 01-network-manager-all.yaml file, but now is to be labeled as "to" (default), "via" (gateway), and a "metric" (put “0” for internet connection’s section and “1” for the switchboard) as their own separate lines. 
-If you are unsure what the necessary elements are to be changed to, you can find them in the default files we created above at the beginning with the second grouping of codes such as defaultIPaddress.conf, defaultDNS.conf, and ipRoute.conf. 
-After saving the changes with ctrl+x to exit and y to save, enter the following code to update it to the settings specified: sudo netplan apply.  
 :  
 If you receive errors simple retype
 ```bash
@@ -44,11 +42,11 @@ sudo nano /etc/netplan/*.yaml
 to fix the errors, typically a word spelled wrong or indention issues.  
 
 A simple short hand is pressing the “up” arrow on the keyboard to repopulate the terminal line with the previous code, and can keep pressing till you find the code you are looking for.
-Next is to run the following codes that will copy the files we made earlier into portions of the AWOW remote that will allow us to connect to the switch and access the RPis over a secure shell (ssh) and and a cluster secure shell (cssh):
+Next is to run the following codes that will copy the files we made earlier into portions of the remote that will allow us to connect to the switch and access the RPis over a secure shell (ssh) and and a cluster secure shell (cssh):
 ```bash
 sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
 sudo cp isc-dhcp-server /etc/default/isc-dhcp-server 
-# (note that the GitHub protocol from Centanni and Smith (2021) has this code ending with a "/", make sure to NOT include it or it won't run)       
+    # (note Centanni and Smith (2021) have this code ending with a "/", do NOT include it or it won't run)       
 sudo cp named.conf.options
 /etc/bind9/named.conf.options
 ```
