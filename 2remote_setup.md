@@ -47,8 +47,7 @@ Next is to run the following codes that will copy the files we made earlier into
 sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
 sudo cp isc-dhcp-server /etc/default/isc-dhcp-server 
     # (note Centanni and Smith (2021) have this code ending with a "/", do NOT include it or it won't run)       
-sudo cp named.conf.options
-/etc/bind9/named.conf.options
+sudo cp named.conf.options /etc/bind9/named.conf.options
 ```
 For this last code, if you haven't created a directory bind9 in the /etc directory it will give an error. This can be fixed as follows:
 ```bash
