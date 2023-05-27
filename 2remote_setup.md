@@ -16,9 +16,9 @@ Once done, click the links below that will take you to the respective codes on t
 
 [01-network-manager-all.yaml](https://github.com/alexcwsmith/PiRATeMC/blob/master/networking/01-network-manager-all.yaml)  
 [dhcpd.conf](https://github.com/George-LabX/raspicluster/blob/main/dhcpd.conf)  
-[isc-dhcp-server](https://github.com/jramborger78/raspicluster/blob/main/isc-dhcp-server)  
-[named.conf.options ](https://github.com/jramborger78/raspicluster/blob/main/named.conf.options)  
-[writeNetworkConfigs.sh](https://github.com/jramborger78/raspicluster/blob/main/writeNetworkConfigs.sh)
+[isc-dhcp-server](https://github.com/George-LabX/raspicluster/blob/main/isc-dhcp-server)  
+[named.conf.options ](https://github.com/George-LabX/raspicluster/blob/main/named.conf.options)  
+[writeNetworkConfigs.sh](https://github.com/George-LabX/raspicluster/blob/main/writeNetworkConfigs.sh)
 
 
 Each of these are to be used internally throughout this process or used as a template for up and coming codes. 
