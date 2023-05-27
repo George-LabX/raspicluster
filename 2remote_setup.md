@@ -14,7 +14,7 @@ echo $(ip -a route) > ipRoute.conf
 
 Once done, click the links below that will take you to the respective codes on the GitHub site, then copy and paste them into a Text Editor file:
 
-[01-network-manager-all.yaml](https://github.com/George-LabX/raspicluster/blob/main/01-network-manager-all.yaml)  
+[network-manager-all.yaml](https://github.com/George-LabX/raspicluster/blob/main/network-manager-all.yaml)  
 [dhcpd.conf](https://github.com/George-LabX/raspicluster/blob/main/dhcpd.conf)  
 [isc-dhcp-server](https://github.com/George-LabX/raspicluster/blob/main/isc-dhcp-server)  
 [named.conf.options ](https://github.com/George-LabX/raspicluster/blob/main/named.conf.options)  
@@ -28,7 +28,7 @@ Next you will need to access the netplan of your device and alter it in order to
 ```bash
 sudo nano /etc/netplan/*.yaml. 
 ``` 
-Now that we are into the network configuration, erase what is currently present in the terminal, and paste the contents of the ```01-network-manager-all.yaml``` file we just made previously. Note that, for our design, the ethernet ports of interest are enp1 and enp2, enp1 being for the organizational internet connection and should be the IP address of the remote device, and enp2 for the switchboard reading "10.1.1.243" that can be left alone unless you personally would like it to read differently. Next is to change the contents of the enp1 and enp2 listings to your system's IP address, gateway, and nameservers. If you are unsure what the necessary elements are to be changed to, you can find them in the default files we created above at the beginning with the second grouping of codes such as defaultIPaddress.conf, defaultDNS.conf, and ipRoute.conf. The 'to' and 'metric' locations can be left the same, while your 'via' is to be changed to your gateway and the namesaver to your namesaver.  
+Now that we are into the network configuration, erase what is currently present in the terminal, and paste the contents of the ```network-manager-all.yaml``` file we just made previously. Note that, for our design, the ethernet ports of interest are enp1 and enp2, enp1 being for the organizational internet connection and should be the IP address of the remote device, and enp2 for the switchboard reading "10.1.1.243" that can be left alone unless you personally would like it to read differently. Next is to change the contents of the enp1 and enp2 listings to your system's IP address, gateway, and nameservers. If you are unsure what the necessary elements are to be changed to, you can find them in the default files we created above at the beginning with the second grouping of codes such as defaultIPaddress.conf, defaultDNS.conf, and ipRoute.conf. The 'to' and 'metric' locations can be left the same, while your 'via' is to be changed to your gateway and the namesaver to your namesaver.  
 
 After saving the changes with ctrl+x to exit and y to save, enter the following code to update it to the settings specified: 
 ```bash
