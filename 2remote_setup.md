@@ -4,27 +4,26 @@
 Now that the RPis have been built, Ubuntu partitioned on your remote device, and SD Cards flashed with the OS system, the next step is programming the remote itself. The following procedure has been adapted from the [GitHub](https://github.com/alexcwsmith/PiRATeMC/tree/master/networking) mentioned in [Centanni and Smith (2021)](https://www.biorxiv.org/content/10.1101/2021.07.23.453577v2.full), with a few steps we included for user accessibility as they were not intuitive during our setup nor referenced. 
 
 
-The first thing to do is to find a location that is best centralized or suited for your design to place the Cisco Catalyst 3650 (or other switchboard) and plug it into a power outlet and wait about five minutes for it to boot itself up with no lights blinking on the front left panel, then connect the remote to the switch by ethernet to one of its front ports. Log into your Ubuntu machine and open the Terminal application by finding the icon or by pressing “ctrl+alt+T”. Then, copy and paste the following set of codes below to create text files of your current network setup as backups and as a reference for specific elements we will implement later in the netplan:
-
+The first thing to do is to find a location that is best centralized or suited for your design to place the Cisco Catalyst 3650 (or other switchboard) and plug it into a power outlet and wait about five minutes for it to boot itself up with no lights blinking on the front left panel, then connect the remote to the switch by ethernet to one of its front ports. Log into your Ubuntu machine and open the Terminal application by finding the icon or by pressing “ctrl+alt+T” and install the necessary packages:
 ```bash
-echo $(hostname -I) > defaultIPaddress.conf
-cat /run/systemd/resolve/resolv.conf > defaultDNS.conf
-echo $(ip -a route) > ipRoute.conf
-``` 
-
+sudo apt install openssh-server
+sudo apt install isc-dhcp-server
+sudo apt install bind9
+sudo apt install clusterssh
+```
 Once done, click the links below that will take you to the respective codes on the GitHub site, then copy and paste them into a Text Editor file:
 
 [network-manager-all.yaml](https://github.com/George-LabX/raspicluster/blob/main/network-manager-all.yaml)  
 [dhcpd.conf](https://github.com/George-LabX/raspicluster/blob/main/dhcpd.conf)  
 [isc-dhcp-server](https://github.com/George-LabX/raspicluster/blob/main/isc-dhcp-server)  
-[named.conf.options ](https://github.com/George-LabX/raspicluster/blob/main/named.conf.options)  
+[named.conf.options](https://github.com/George-LabX/raspicluster/blob/main/named.conf.options)  
 [writeNetworkConfigs.sh](https://github.com/George-LabX/raspicluster/blob/main/writeNetworkConfigs.sh)
 
-
-Each of these are to be used internally throughout this process or used as a template for up and coming codes. 
-
-
-Next you will need to access the netplan of your device and alter it in order to recognize the switchboard and create a Local Area Network (LAN) connection with the AWOW remote PC. This is possible with the following code: 
+Each of these are to be used internally throughout this process or used as a template for up and coming codes. Open a terminal and execute the following code to make backups of the current network configuration and useful files for reference in later sections.
+```bash
+./writeNetworkConfigs.sh
+```
+Next you will need to access the netplan of your device and alter it in order to recognize the switchboard and create a Local Area Network (LAN) connection with the remote. This is possible with the following code: 
 ```bash
 sudo nano /etc/netplan/*.yaml. 
 ``` 
@@ -33,9 +32,8 @@ Now that we are into the network configuration, erase what is currently present 
 After saving the changes with ctrl+x to exit and y to save, enter the following code to update it to the settings specified: 
 ```bash
 sudo netplan apply.  
-```
-:  
-If you receive errors simple retype
+```  
+If you receive errors simple retype:
 ```bash
 sudo nano /etc/netplan/*.yaml 
 ```
