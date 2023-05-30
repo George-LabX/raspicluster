@@ -11,13 +11,13 @@ sudo apt install isc-dhcp-server
 sudo apt install bind9
 sudo apt install clusterssh
 ```
-Once done, click the links below that will take you to the respective codes on the GitHub site, then copy and paste them into a Text Editor file:
+Once done, click the links below that can be found in the [prog_files] folder that will take you to the respective codes on the GitHub site, then copy and paste them into a Text Editor file:
 
-[network-manager-all.yaml](https://github.com/George-LabX/raspicluster/blob/main/network-manager-all.yaml)  
-[dhcpd.conf](https://github.com/George-LabX/raspicluster/blob/main/dhcpd.conf)  
-[isc-dhcp-server](https://github.com/George-LabX/raspicluster/blob/main/isc-dhcp-server)  
-[named.conf.options](https://github.com/George-LabX/raspicluster/blob/main/named.conf.options)  
-[writeNetworkConfigs.sh](https://github.com/George-LabX/raspicluster/blob/main/writeNetworkConfigs.sh)
+[network-manager-all.yaml](https://github.com/George-LabX/raspicluster/blob/main/prog_files/network-manager-all.yaml)  
+[dhcpd.conf](https://github.com/George-LabX/raspicluster/blob/main/prog_files/dhcpd.conf)  
+[isc-dhcp-server](https://github.com/George-LabX/raspicluster/blob/main/prog_files/isc-dhcp-server)  
+[named.conf.options](https://github.com/George-LabX/raspicluster/blob/main/prog_files/named.conf.options)  
+[writeNetworkConfigs.sh](https://github.com/George-LabX/raspicluster/blob/main/prog_files/writeNetworkConfigs.sh)
 
 Each of these are to be used internally throughout this process or used as a template for up and coming codes. Open a terminal and execute the following code to make backups of the current network configuration and useful files for reference in later sections.
 ```bash
