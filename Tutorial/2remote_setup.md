@@ -11,7 +11,7 @@ sudo apt install isc-dhcp-server
 sudo apt install bind9
 sudo apt install clusterssh
 ```
-Once done, click the links below that can be found in the [prog_files] folder that will take you to the respective codes on the GitHub site, then copy and paste them into a Text Editor file:
+Once done, click the links below that can be found in the [prog_files](https://github.com/George-LabX/raspicluster/tree/main/prog_files) folder that will take you to the respective codes on the GitHub site, then copy and paste them into a Text Editor file:
 
 [network-manager-all.yaml](https://github.com/George-LabX/raspicluster/blob/main/prog_files/network-manager-all.yaml)  
 [dhcpd.conf](https://github.com/George-LabX/raspicluster/blob/main/prog_files/dhcpd.conf)  
