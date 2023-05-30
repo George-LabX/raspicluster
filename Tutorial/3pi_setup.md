@@ -1,5 +1,5 @@
 # Programming a Raspberry Pi (RPi)
-##### This tutorial we will walk you through the individual programming of each RPi to be in a cluster design.
+##### This tutorial we will walk you through the individual programming of each RPi to be in a cluster design. All the files mentioned for RPi programming can be found in the [RPi_codes](https://github.com/George-LabX/raspicluster/tree/main/RPi_Codes) folder.
 #  
 
 
