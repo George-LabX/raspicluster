@@ -9,11 +9,11 @@ and how to begin taking videos in a synchronized fashion. There is also many fil
 
 Please follow the numbered steps to move through this tutorial without any obstacles. First we will show you how to install Ubuntu and RPi imager on your device, programming the remote (PC) to act as a controller in conjuction with the switchboard, programming the RPis, and then seeing them in action.
 
-#### [1ubuntu_imager](https://github.com/George-LabX/raspicluster/blob/main/1ubuntu_imager.md)
+#### [1ubuntu_imager](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/1ubuntu_imager.md)
 
-#### [2remote_setup](https://github.com/George-LabX/raspicluster/blob/main/2remote_setup.md)
+#### [2remote_setup](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/2remote_setup.md)
 
-#### [3pi_setup](https://github.com/George-LabX/raspicluster/blob/main/3pi_setup.md)
+#### [3pi_setup](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/3pi_setup.md)
 
-#### [4using_setup](https://github.com/George-LabX/raspicluster/blob/main/4using_setup.md)
+#### [4using_setup](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/4using_setup.md)
 
