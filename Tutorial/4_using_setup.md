@@ -1,5 +1,5 @@
 # Using the RPis
-#### In this section we will instruct how to execute the recording file we just edited, remove old videos from the RPis, fetch videos from the RPis that were not transferred to the remote (often due to a connection loss), and review the overall process with some additional codes or simplifications that one may utilize, as well as issues we encountered and worked around. The executable codes can be found in the [RPi_Codes](https://github.com/George-LabX/raspicluster/tree/main/RPi_Codes) folder.
+#### In this section we will instruct how to execute the recording file we just edited, remove old videos from the RPis, fetch videos from the RPis that were not transferred to the remote (often due to a connection loss), and review the overall process with some additional codes or simplifications that one may utilize, as well as issues we encountered and worked around. The executable codes for both the RPis and remote can be found in the [RPi_Codes](https://github.com/George-LabX/raspicluster/tree/main/RPi_Codes) and [remote_codes](https://github.com/George-LabX/raspicluster/tree/main/remote_codes) folders.
 #
 First, connect to all of the RPis by using the ```cssh``` code found in the ```.bashrc``` file of the remote, for example: 
 ```bash
