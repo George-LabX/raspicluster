@@ -20,3 +20,5 @@ Once installed, if you have not already, visit the google drive found on the git
 Download the appropriate OS system depending on your design, whether standalone or cluster. Note: this tutorial is for a cluster design. 
 
 Plug in an SD card with a reader, and from left to right on the RPi Manager select “Custom Image” for the operating system dropdown, then the listed SD card as the storage device dropdown, and lastly “Write”. Once finished, remove the SD card and repeat as needed.
+
+[next](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/2remote_setup.md)
