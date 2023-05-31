@@ -13,7 +13,7 @@ Once executed in the remote terminal, your screen should look something like the
 
 #
 ## Executing recordVideo.sh
-To execute the ```recordVideo.sh``` file (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/recordVideo.sh) with the automated parameters and processes for the videos, you do so as follows:
+To execute the ```recordVideo.sh``` file (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/recordVideo.sh)) with the automated parameters and processes for the videos, you do so as follows:
 ```bash
 ./recordVideo.sh $1 $2 $3
   # $1 = argument 1, this is the name of the video ("LGA01" , "ShA02", "PR01" etc.)
