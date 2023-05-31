@@ -20,7 +20,7 @@ sudo apt-get update
 This will keep your devices up to date and running smoothly. 
 
 Next, we’ll change the file that we will be executing via ```cssh``` to set the recording parameters, converting to mp4, transferring to the AWOW, and deleting the other video format version (h264). 
-In the RPi terminal type in:
+This is a file already preinstalled from the OS SDcard flash from [PiRATeMC]((https://drive.google.com/drive/folders/1Y9IGVBCkBdnRykqMNaKmlipFwnT6WQuY). In the RPi terminal type in:
 ```bash
 nano recordVideo.sh 
 ```
@@ -28,7 +28,7 @@ And what you should see is the image below:
 
 ![dw647j4e](https://github.com/jramborger78/raspicluster/assets/134438857/95b5b097-077d-4a9f-ba26-a1aef1baf61e)
 
-What you will change is the bitrate ```-br 55```, width of the resolution ```-w 800```, and the height of the resolution ```-h 600``` in line 3, as well as adding the name (or convention of your design choice) of this RPi to the outputs, so if it is the first box in your design it will be ```$1_Box01_$now.h264```. Once done, ctrl+x will exit, then follow the prompts to save. Note that in this recording file you can adjust the parameters to fit whatever configuration works best for your organization.  
+What you will change is the bitrate ```-br 55```, width of the resolution ```-w 800```, and the height of the resolution ```-h 600``` in line 3, as well as adding the name (or convention of your design choice) of this RPi to the outputs, so if it is the first box in your design it will be ```$1_Box01_$now.h264```. Once done, ctrl+x will exit, then follow the prompts to save. Note that in this recording file you can adjust the parameters to fit whatever configuration works best for your organization. The code filled out as such can be found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/recordVideo.sh).  
 
 Next change the bashrc file of the RPi. Access this file by typing:
 ```bash
