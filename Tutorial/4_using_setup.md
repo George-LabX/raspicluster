@@ -44,8 +44,7 @@ After making them they need to be made executable which is possible with the cod
 ```bash
 chmod +x recoxy.sh 
 ```
-The new updated codes on GitHub have ```echo``` commands in the ```recordVideo.sh``` file, and as you can see we added some of our own that were more fitting to our operation to signal to our technicians that a video has begun recording, converting, transferring, and that all has completed without issue.  
-We found this useful to prevent operator error or uncertainty. 
+The new updated codes on GitHub have ```echo``` commands in the ```recordVideo.sh``` file, and as you can see we added some of our own that were more fitting to our operation to signal to our technicians that a video has begun recording, converting, transferring, and that all has completed without issue. We found this useful to prevent operator error or uncertainty. 
 
 
 
@@ -56,11 +55,15 @@ We found this useful to prevent operator error or uncertainty.
 As one may have noticed, the ```recordVideo.sh``` command records the video, converts it from format h264 to mp4, transfers it to the remote controller, and then deletes the old h264 file. What this does not show is that the mp4 file is left on the RPi’s SD card. This is a good practice given the RPis can “lose connection” during the secure copy (scp) from the RPi to the remote and this ensures that the video that did not transfer is there to then be fetched.
 
 ### Fetching Videos from RPis
-GitHub has a code in the “scripts" folder in a file called ```transferVideo.sh``` that will be executed in all the RPis or in a single RPi that will send any and all videos from the RPi to your remote. Simply create a text file in Text Editor on Ubuntu, copy and paste the code from GitHub, and while connected to all RPis type:
+[PiRATeMC](https://github.com/alexcwsmith/PiRATeMC/blob/master/scripts/transferVideo.sh) has a code in the “scripts" folder in a file called ```transferVideo.sh``` that will be executed in all the RPis or in a single RPi that will send any and all videos from the RPi to your remote. Simply create a text file in Text Editor on Ubuntu, copy and paste the code from [PiRATeMC](https://github.com/alexcwsmith/PiRATeMC/blob/master/scripts/transferVideo.sh), and while connected to all RPis type:
 ```bash
 scp yourremote:~/name_of_text_file_created.sh . 
 ```
-where this last period is crucial to tell the file to be saved in the RPi’s home directory. Then, simply allow it to be executable with ```chmod +x name_of_text_file_created.sh``` and you can now execute the code with:
+with the necessary proxies as your design, and where this last period is crucial to tell the file to be saved in the RPi’s home directory. Then, simply allow it to be executable with:
+```bash
+chmod +x name_of_text_file_created.sh
+```
+and you can now execute the code with:
 ```bash
 ./name_of_text_file_created.sh 
 ```
