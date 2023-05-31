@@ -6,7 +6,9 @@
 To access a single RPi look for the IP address on the dhcp-lease-list and run the following code: 
 ```bash
 ssh pi@10.1.1.XX # replacing “XX” with the respective ending numbers of the RPi
+
 # password when prompted
+
 raspberry
 ```
 
