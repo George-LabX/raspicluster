@@ -16,7 +16,7 @@ If the version of Ubuntu is 16.04 LTS (Xenial Xerus) or later, including Ubuntu 
 ```bash
 sudo snap install rpi-imager. 
 ```
-Once installed, if you have not already, visit the google drive found on the github site [here](https://drive.google.com/drive/folders/1Y9IGVBCkBdnRykqMNaKmlipFwnT6WQuY).
+Once installed, if you have not already, visit the google drive found on the PiRATeMC site [here](https://drive.google.com/drive/folders/1Y9IGVBCkBdnRykqMNaKmlipFwnT6WQuY).
 Download the appropriate OS system depending on your design, whether standalone or cluster. Note: this tutorial is for a cluster design. 
 
 Plug in an SD card with a reader, and from left to right on the RPi Manager select “Custom Image” for the operating system dropdown, then the listed SD card as the storage device dropdown, and lastly “Write”. Once finished, remove the SD card and repeat as needed.
