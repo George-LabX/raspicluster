@@ -103,7 +103,7 @@ export REMOTEVIDPATH='/$HOME/RPi_Videos' #path on remote to save videos to
 export BOX= Box11
 ```
 ### Additions and Remarks to Fetching and Deleting Content	
-The ```transferVideo.sh``` file, which as seen above we named ```send.sh``` (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/send.sh)), was useful tool if we needed videos from all or one RPi. But we felt that creating one that was utilized from the remote itself was beneficial as well and would have the long form of the ```scp``` code embedded in it, asking for only the RPi’s IP address as an argument that we named ```fetch.sh``` (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/remote_codes/fetch.sh) as the example and image shown below.
+The ```transferVideo.sh``` file, which as seen above we named ```send.sh``` (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/send.sh)), was useful tool if we needed videos from all or one RPi. But we felt that creating one that was utilized from the remote itself was beneficial as well and would have the long form of the ```scp``` code embedded in it, asking for only the RPi’s IP address as an argument that we named ```fetch.sh``` (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/remote_codes/fetch.sh)) as the example and image shown below.
 ```bash
 ./fetch.sh 10.1.1.55
 ```
