@@ -37,7 +37,7 @@ nano .bashrc
 ![mini_bashrc_screenshot](https://github.com/jramborger78/raspicluster/assets/134438857/500f2eea-0975-49fb-8aa2-335dbfcace7b)
 
 The only thing one needs to change here (if one keeps the switch IP address assigned prior) is the hostname of your remote.  
-This can be found as the first "export" line ```export REMOTE=rpicam@10.1.1.243``` and change it to ```export REMOTE=yourhostname@10.1.1.243```. Once done, ctrl+x will exit, then follow the prompts to save.    
+This can be found as the first "export" line ```export REMOTE=rpicam@10.1.1.243``` and change it to ```export REMOTE=yourhostname@10.1.1.243```. Once done, ctrl+x will exit, then follow the prompts to save. Not that you will need to create folders with the names "RPi_SessionLogs" and "RPi_Videos" in your home directory if this is the convention/path you wish to use.   
   
 Now in the RPi terminal, type in:
 ```bash
