@@ -64,3 +64,4 @@ dhcp-lease-list
 ```
 And now you should see a the Pi connected with an IP address around 10.1.1.50 and named “raspberry”, something you can individuate once we now program the RPis.
 
+[next](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/3pi_setup.md)
