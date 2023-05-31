@@ -1,3 +1,6 @@
+# Specific to Row B path
+# Generic "send" executable file that will transfer all mp4 videso from the RPi to the remote
+
 #!/bin/bash
 
 echo "Transfering..."
