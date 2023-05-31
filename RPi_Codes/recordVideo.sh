@@ -1,3 +1,5 @@
+# Specific to Row B path
+
 ans=$(echo "$2 * 60000" | bc)
 now=$(date "+%F")
 echo "Started recording at" $(date +%H:%M:%S)
