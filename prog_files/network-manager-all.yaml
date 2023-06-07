@@ -1,17 +1,23 @@
-### Placeholder, need to update to our configuration
+### Configuration for Mini_D
 
 network:
   ethernets:
-    enp6s0:
+    enp1s0:
      dhcp4: no
-     addresses: [10.81.104.165/24]
-     gateway4: 10.81.104.1
+     addresses: [132.239.108.123/24] # change to mini IP Address
+     routes: # change "gateways" to the following 4 lines
+     -  to: default
+        via: 132.239.108.97 # the gateway itself
+        metric: 0 # 0 tells the network "this first"
      nameservers:
-       addresses: [10.94.8.20,10.95.16.20]
-    enp5s0:
+       addresses: [132.239.0.250,132.239.0.252]  # the local network stuff
+    enp2s0:
      dhcp4: no
-     addresses: [10.1.1.243/24]
-     gateway4: 10.1.1.1
+     addresses: [10.1.1.243/24] # leave the same, it assigns this to the switch
+     routes:
+     -  to: default
+        via: 10.1.1.1
+        metric: 1
      nameservers:
        addresses: [10.1.1.243]
   version: 2
