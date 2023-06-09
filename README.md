@@ -17,7 +17,7 @@ Please follow the numbered steps below found in the tutorial folder to move thro
 
 #### [4using_setup](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/4using_setup.md)
 
-#
+# Disclaimer
 BSD 3-Clause License
 
 Copyright (c) 2023, Alexander CW Smith
