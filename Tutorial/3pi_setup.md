@@ -26,7 +26,7 @@ nano recordVideo.sh
 ```
 And what you should see is the image below:
 
-![dw647j4e](https://github.com/jramborger78/raspicluster/assets/134438857/95b5b097-077d-4a9f-ba26-a1aef1baf61e)
+![recordVideo sh_image](https://github.com/George-LabX/raspicluster/assets/134438857/a4b45f60-b4ea-43ad-b761-9bab2419ef3b)
 
 What you will change is the bitrate ```-br 55```, width of the resolution ```-w 800```, and the height of the resolution ```-h 600``` in line 3, as well as adding the name (or convention of your design choice) of this RPi to the outputs, so if it is the first box in your design it will be ```$1_Box01_$now.h264```. Once done, ctrl+x will exit, then follow the prompts to save. Note that in this recording file you can adjust the parameters to fit whatever configuration works best for your organization. The code filled out as such can be found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/recordVideo.sh).  
 
@@ -34,7 +34,7 @@ Next change the bashrc file of the RPi. Access this file by typing:
 ```bash
 nano .bashrc 
 ```
-![mini_bashrc_screenshot](https://github.com/jramborger78/raspicluster/assets/134438857/500f2eea-0975-49fb-8aa2-335dbfcace7b)
+![pi_bash_image](https://github.com/George-LabX/raspicluster/assets/134438857/225808a5-b60e-476e-a02d-4cf2780de86a)
 
 The only thing one needs to change here (if one keeps the switch IP address assigned prior) is the hostname of your remote.  
 This can be found as the first "export" line ```export REMOTE=rpicam@10.1.1.243``` and change it to ```export REMOTE=yourhostname@10.1.1.243```. Once done, ctrl+x will exit, then follow the prompts to save. Not that you will need to create folders with the names "RPi_SessionLogs" and "RPi_Videos" in your home directory if this is the convention/path you wish to use.   
@@ -44,7 +44,7 @@ Now in the RPi terminal, type in:
 sudo raspi-config
 ```
 This will allow you to alter the hostname of the RPi to match its respective box and representation on dhcp-lease-list (options 2), as well as ensure certain elements of the peripherals are active, such as ssh for connection and sending videos and that the camera interface is on (option 5), including other possible options such as changing the password (option 1) of the RPi.
-![image](https://github.com/jramborger78/raspicluster/assets/134438857/0bc6ef99-6ba8-45bb-a5d5-dbf3377e91e7)
+![raspiconfig_image](https://github.com/George-LabX/raspicluster/assets/134438857/f9549933-4aea-446a-ba2e-e8fd169df4c2)
 If you change the password and have a cluster system, it is crucial the password is exact across all RPis.  
 Once done, press the right arrow key twice to access “finish” and press “enter”.  
 The RPi will reset, in which case you can now plug in another RPi to allow it to boot and connect. 
@@ -57,6 +57,6 @@ nano .bashrc
 From here, you will add ```alias camconnect='cssh pi@10.1.1.50 …'``` as exemplified at the bottom of the picture below.  
 Notice how they are not separated by commas and that the entire code beginning with cssh is within quotes.  
 From here you can add all the RPis at one time and I have found it to be faster and not an issue, but if it is more convenient for yourself you can always add one at a time.
-![image](https://github.com/jramborger78/raspicluster/assets/134438857/8e2abcc7-9689-447f-8b22-b03574da5ed1)
+![mini_bash_image](https://github.com/George-LabX/raspicluster/assets/134438857/d8940123-d39f-44fa-95a4-9a75b94066a3)
 
 [next](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/4_using_setup.md)
