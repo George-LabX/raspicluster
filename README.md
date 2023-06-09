@@ -1,7 +1,7 @@
 # raspicluster
 Step-by-step tutorial on installation and execution of Raspberry Pi videography  
 
-Raspicluster is an open sourced repository replicating the [PiRATeMC](https://www.biorxiv.org/content/10.1101/2021.07.23.453577v2.full) videography system with additional coding and instructional updates.
+Raspicluster is an open sourced repository replicating the [PiRATeMC](https://www.biorxiv.org/content/10.1101/2021.07.23.453577v2.full) (Disclaimer below) videography system with additional coding and instructional updates.
 This is specifically a cluster (```cssh```) and not a standalone (```ssh```) design.
 
 This tutorial will thouroughly walk you through the necessary steps to install Ubuntu and rpi imager, program the remote and Raspberry Pies (RPi),
@@ -16,8 +16,8 @@ Please follow the numbered steps below found in the tutorial folder to move thro
 #### [3pi_setup](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/3pi_setup.md)
 
 #### [4using_setup](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/4using_setup.md)
-
-# Disclaimer
+  
+### Disclaimer
 BSD 3-Clause License
 
 Copyright (c) 2023, Alexander CW Smith
