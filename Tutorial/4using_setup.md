@@ -9,7 +9,7 @@ This can can be saved in a text file for easy reference.
 
 Once executed in the remote terminal, your screen should look something like the image below:
 
-![resized_cssh](https://github.com/jramborger78/raspicluster/assets/134438857/fa3f9514-502c-489f-ad6e-69c33fa17790)
+![cssh_image](https://github.com/George-LabX/raspicluster/assets/134438857/4c1dbebb-3bd4-4fa7-9064-c1ff22423b7d)
 
 #
 ## Executing recordVideo.sh
@@ -36,7 +36,7 @@ nano recordVideo.sh
 ```
 From here we edited and saved it twice with the new and individualized paths for each drug cohort, and when saving, named them ```recoxy.sh``` ([Oxycodone](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/recoxy.sh), image below) and ```recoc.sh``` ([Cocaine](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/reccoc.sh)) respectively to make it simpler on our technicians.  
 
-![Screenshot from 2023-05-12 09-41-28](https://github.com/jramborger78/raspicluster/assets/134438857/fcf1ad83-b482-471c-b960-3f5bc54eb73f)
+![recoxy sh_image](https://github.com/George-LabX/raspicluster/assets/134438857/d2d075ec-075d-49d6-87f0-980516e86897)
 
 The original is still present on our RPis now acting as a template for future drugs if need be.  
 
@@ -68,7 +68,7 @@ and you can now execute the code with:
 ./name_of_text_file_created.sh 
 ```
 and transfer all videos from the RPis. A copy of ours can be found below complete with path and ```echo``` commands.
-![Screenshot from 2023-05-12 09-41-48](https://github.com/jramborger78/raspicluster/assets/134438857/88e799c1-9bde-4b41-9a7b-6bc5699910ef)
+![send sh_image](https://github.com/George-LabX/raspicluster/assets/134438857/0c9d06a0-31c1-4f07-9c67-9968e521d4fd)
 
 ### Deleting Videos from RPis
 Deleting videos, files, or any content is quite simple. Simply connect to all the RPis and type:
@@ -107,8 +107,7 @@ The ```transferVideo.sh``` file, which as seen above we named ```send.sh``` (fou
 ```bash
 ./fetch.sh 10.1.1.55
 ```
-
-![Screenshot from 2023-05-12 09-13-40](https://github.com/jramborger78/raspicluster/assets/134438857/6f7636fd-f565-47a8-8672-a3d3151e0907)
+![fetch sh_image](https://github.com/George-LabX/raspicluster/assets/134438857/8c48e848-165e-4b37-a8e3-c81262e4e2ea)
 
 This allowed transferring of video from the one RPi that may have not sent a video due to a conncetion loss or if we wanted to acquire a video for whatever reason without cluttering our space with unnecessary transfers. This was done by creating a text file and changing its mode into one that is executable.
 
