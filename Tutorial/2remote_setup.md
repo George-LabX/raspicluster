@@ -31,7 +31,7 @@ Now that we are into the network configuration, erase what is currently present 
 
 After saving the changes with ctrl+x to exit and y to save, enter the following code to update it to the settings specified: 
 ```bash
-sudo netplan apply.  
+sudo netplan apply 
 ```  
 If you receive errors simple retype:
 ```bash
@@ -51,6 +51,7 @@ For this last code, if you haven't created a directory bind9 in the /etc directo
 ```bash
 cd /etc                                                    # changes directory to /etc
 sudo mkdir bind9                                           # creates bind9 directory for you to copy file into
+cd
 sudo cp named.conf.options /etc/bind9/named.conf.options   # copies file into directory
 ```      
 And lastly, we turn on the necessary applications to access the switch:
