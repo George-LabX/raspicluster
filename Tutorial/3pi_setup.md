@@ -59,4 +59,4 @@ Notice how they are not separated by commas and that the entire code beginning w
 From here you can add all the RPis at one time and I have found it to be faster and not an issue, but if it is more convenient for yourself you can always add one at a time.
 ![mini_bash_image](https://github.com/George-LabX/raspicluster/assets/134438857/d8940123-d39f-44fa-95a4-9a75b94066a3)
 
-[next](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/4_using_setup.md)
+[next](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/4using_setup.md)
