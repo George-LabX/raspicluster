@@ -12,13 +12,6 @@ ssh pi@10.1.1.XX # replacing “XX” with the respective ending numbers of the 
 raspberry
 ```
 
-Now that we are connected, a habit to incorporate in both the RPi and remote terminals is to run the codes: 
-```bash
-sudo apt-get upgrade
-sudo apt-get update 
-```
-This will keep your devices up to date and running smoothly. 
-
 Next, we’ll change the file that we will be executing via ```cssh``` to set the recording parameters, converting to mp4, transferring to the AWOW, and deleting the other video format version (h264). 
 This is a file already preinstalled from the OS SDcard flash from [PiRATeMC](https://drive.google.com/drive/folders/1Y9IGVBCkBdnRykqMNaKmlipFwnT6WQuY). In the RPi terminal type in:
 ```bash
