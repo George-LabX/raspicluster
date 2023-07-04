@@ -46,7 +46,7 @@ sudo nano /etc/netplan/*.yaml
 to fix the errors, typically a word spelled wrong or indention issues.  
 
 A simple short hand is pressing the “up” arrow on the keyboard to repopulate the terminal line with the previous code, and can keep pressing till you find the code you are looking for.
-Next is to run the following codes that will copy the files we made earlier into portions of the remote that will allow us to connect to the switch and access the RPis over a secure shell (ssh) and and a cluster secure shell (cssh):
+Next is to run the following codes that will copy the files we made earlier into portions of the remote that will allow us to connect to the switch and access the RPis over a secure shell (ssh) and and a cluster secure shell (cssh). NOTE: If you set up the network plan differently than then template (enp1 = institution, enp2 = switch) then you need to edit the isc-dhcp-server file we made previously to be to the ethernet port you have assisgned for the switch at the very bottom. This file is set up for enp1 port.
 ```bash
 sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
 sudo cp isc-dhcp-server /etc/default/isc-dhcp-server 
