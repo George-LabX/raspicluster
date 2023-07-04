@@ -19,21 +19,27 @@ Once done, click the links below that can be found in the [prog_files](https://g
 [named.conf.options](https://github.com/George-LabX/raspicluster/blob/main/prog_files/named.conf.options)  
 [writeNetworkConfigs.sh](https://github.com/George-LabX/raspicluster/blob/main/prog_files/writeNetworkConfigs.sh)
 
-Each of these are to be used internally throughout this process or used as a template for up and coming codes. Open a terminal and execute the following code to make backups of the current network configuration and useful files for reference in later sections.
+Each of these are to be used internally throughout this process or used as a template for up and coming codes. Open a terminal, make the following code executable by "changing" its "mode" ```(chmod)```and execute it to make backups of the current network configuration and useful files for reference in later sections. 
 ```bash
+chmod +x writeNetworkConfigs.sh
 ./writeNetworkConfigs.sh
 ```
-Next you will need to access the netplan of your device and alter it in order to recognize the switchboard and create a Local Area Network (LAN) connection with the remote. This is possible with the following code: 
+Next you will need to access the netplan of your device and alter it in order to recognize the switchboard and create a Local Area Network (LAN) connection with the remote. First thing we will want to do is locate what the ethernet ports are connected to by running:
 ```bash
+ip a
+```
+This will bring up current connections and show the ethernet ports that begin with "enp1" and "enp2". The institutional network should have a line stating "inet" and an IP address, something like: XXX.XXX.XX.XX/24. Now that we know which ethernet corresponds to which connection, copy the 01-network-manager-all.yaml file we just previously made into the netplan as this is a template providing the proper indentations and areas for edits, and then open it to make the necessary edits. This is possible with the following code: 
+```bash
+sudo cp 01-network-manager-all.yaml /etc/netplan/
 sudo nano /etc/netplan/*.yaml. 
 ``` 
-Now that we are into the network configuration, erase what is currently present in the terminal, and paste the contents of the ```network-manager-all.yaml``` file we just made previously. Note that, for our design, the ethernet ports of interest are enp1 and enp2, enp1 being for the organizational internet connection and should be the IP address of the remote device, and enp2 for the switchboard reading "10.1.1.243" that can be left alone unless you personally would like it to read differently. Next is to change the contents of the enp1 and enp2 listings to your system's IP address, gateway, and nameservers. If you are unsure what the necessary elements are to be changed to, you can find them in the default files we created above at the beginning with the second grouping of codes such as defaultIPaddress.conf, defaultDNS.conf, and ipRoute.conf. The 'to' and 'metric' locations can be left the same, while your 'via' is to be changed to your gateway and the namesaver to your namesaver.  
+Now that we are into the network configuration, note the ethernet ports of interest. This template is set up to have enp1 be the organizational internet connection, and enp2 for the switchboard reading "10.1.1.243/24" that can be left alone unless you personally would like it to read differently. Switch these if need be. Next is to change the contents of the enp1 and enp2 listings to your system's IP address, gateway, and nameservers. If you are unsure what the necessary elements are to be changed to, you can find them in the default files we created above at the beginning with the second grouping of codes that made a backup network folder such as defaultIPaddress.conf for the remote IP address, defaultDNS.conf for the namesavers, and ipRoute.conf for the gateway, or in this case the "route". The 'to' and 'metric' locations can be left the same, while your 'via' is to be changed to your gateway and the namesaver to your namesaver.  
 
 After saving the changes with ctrl+x to exit and y to save, enter the following code to update it to the settings specified: 
 ```bash
 sudo netplan apply 
 ```  
-If you receive errors simple retype:
+If you receive errors simply retype:
 ```bash
 sudo nano /etc/netplan/*.yaml 
 ```
