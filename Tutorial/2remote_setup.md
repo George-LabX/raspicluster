@@ -31,7 +31,7 @@ ip a
 This will bring up current connections and show the ethernet ports that begin with "enp1" and "enp2". The institutional network should have a line stating "inet" and an IP address, something like: XXX.XXX.XX.XX/24. Now that we know which ethernet corresponds to which connection, copy the 01-network-manager-all.yaml file we just previously made into the netplan as this is a template providing the proper indentations and areas for edits, and then open it to make the necessary edits. This is possible with the following code: 
 ```bash
 sudo cp 01-network-manager-all.yaml /etc/netplan/
-sudo nano /etc/netplan/*.yaml. 
+sudo nano /etc/netplan/*.yaml 
 ``` 
 Now that we are into the network configuration, note the ethernet ports of interest. This template is set up to have enp1 be the organizational internet connection, and enp2 for the switchboard reading "10.1.1.243/24" that can be left alone unless you personally would like it to read differently. Switch these if need be. Next is to change the contents of the enp1 and enp2 listings to your system's IP address, gateway, and nameservers. If you are unsure what the necessary elements are to be changed to, you can find them in the default files we created above at the beginning with the second grouping of codes that made a backup network folder such as defaultIPaddress.conf for the remote IP address, defaultDNS.conf for the namesavers, and ipRoute.conf for the gateway, or in this case the "route". The 'to' and 'metric' locations can be left the same, while your 'via' is to be changed to your gateway and the namesaver to your namesaver.  
 
