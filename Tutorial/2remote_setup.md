@@ -1,7 +1,7 @@
 # Remote Control Setup
 #### In this tutorial, "remote" will be refering to the PC acting as a controller for the setup.
 #
-Now that the RPis have been built, Ubuntu partitioned on your remote device, and SD Cards flashed with the OS system, the next step is programming the remote itself. The following procedure has been adapted from the [GitHub](https://github.com/alexcwsmith/PiRATeMC/tree/master/networking) mentioned in [Centanni and Smith (2021)](https://www.biorxiv.org/content/10.1101/2021.07.23.453577v2.full), with a few steps we included for user accessibility as they were not intuitive during our setup nor referenced. 
+Now that the RPis have been built, Ubuntu partitioned on your remote device, and SD Cards flashed with the OS system, the next step is programming the remote itself. The following procedure has been adapted from the [GitHub](https://github.com/alexcwsmith/PiRATeMC/tree/master/networking) mentioned in [Centanni and Smith (2023)](https://www.sciencedirect.com/science/article/pii/S2772392523000512), with a few steps we included for user accessibility as they were not intuitive during our setup nor referenced. 
 
 
 The first thing to do is to find a location that is best centralized or suited for your design to place the Cisco Catalyst 3650 (or other switchboard) and plug it into a power outlet and wait about five minutes for it to boot itself up with no lights blinking on the front left panel, then connect the remote to the switch by ethernet to one of its front ports. Log into your Ubuntu machine and open the Terminal application by finding the icon or by pressing “ctrl+alt+T” and install the necessary packages:
