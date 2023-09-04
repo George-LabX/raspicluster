@@ -1,15 +1,14 @@
-\Outputs
+\OUTPUTS
+^left stimulus light = 4
+^right stimulus light = 5
 
-^H1 = 4
-^H2 = 5 
 
 S.S.1,
 S1,
-#START: --- > NEXT
-1": ON ^H1; ON ^H2 ---> S2
-
+#START: ---> S2
 S2,
-2": OFF ^H1; OFF ^H2 ---> S3
-
+1": ON^left stimulus light; ON^right stimulus light--->S3
 S3,
-3": ---> STOPABORT
+2": OFF^lef stimulus light; OFF^right stimulus light--->S4
+S4,
+3": --->STOPABORT
