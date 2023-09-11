@@ -1,6 +1,5 @@
 #!/bin/bash
-#This script records a video and copies it to network location defined in .bashrc (REMOTEVIDPATH)
-#Arguments: $1:Name of Video, $2: Length (minutes), $3: Frames per second
+# Code for RPi experimental sessions.
 ans=$(echo "$2 * 60000" | bc)
 now=$(date "+%F")
 echo "Started recording at" $(date +%H:%M:%S)
