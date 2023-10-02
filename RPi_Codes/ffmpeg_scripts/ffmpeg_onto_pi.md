@@ -31,5 +31,8 @@ You should now be able to go back to the RPi home directory and test that FFmpeg
 cd ~/     # change directory to home
 ffmpeg    # executes ffmpeg, revealing the packages installed and version
 ```
+
 And now you should see the following:
+
+![ffmpeg_terminal](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/ffmpeg_scripts/ffmpeg_terminal.png)
 
