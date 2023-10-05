@@ -5,7 +5,7 @@ First, connect to all of the RPis by using the ```cssh``` code found in the ```.
 ```bash
 cssh pi@10.1.1.50 pi@10.1.1.51 pi@10.1.1.52 pi@10.1.1.53 pi@10.1.1.54 pi@10.1.1.55 pi@10.1.1.56
 ```
-This can can be saved in a text file for easy reference.  
+This can can be saved in a text file for easy reference and pasted into a terminal using the mouse option, not "ctrl+v" option.  
 
 Once executed in the remote terminal, your screen should look something like the image below:
 
@@ -59,7 +59,7 @@ As one may have noticed, the ```recordVideo.sh``` command records the video, con
 ```bash
 scp yourremote:~/name_of_text_file_created.sh . 
 ```
-with the necessary proxies as your design, and where this last period is crucial to tell the file to be saved in the RPi’s home directory. Then, simply allow it to be executable with:
+with the necessary proxies as your design, and where this last period '''.''' is crucial to tell the file to be saved in the RPi’s home directory. Then, simply allow it to be executable with:
 ```bash
 chmod +x name_of_text_file_created.sh
 ```
@@ -75,41 +75,7 @@ Deleting videos, files, or any content is quite simple. Simply connect to all th
 ```bash
 rm *mp4 
 ```
-and this will remove any and all files ending in mp4, or simply type in the exact name of the file you wish to remove. Another method we developed was a file we called ```delete.sh``` (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/delete.sh)) that will allow one to delete a single session/video on one or more RPis as seen below:
-```bash
-./delete.sh LGA12 BOX 2023-05-23
-
-  # SESSION=$1
-  # BOX=$BOX
-  # DATE=$3
-
-    # rm "${SESSION}_${BOX}_${DATE}.mp4"
-```
-This will require one to create said variable (BOX) in the RPi ```.bashrc```, but as usual can be individualized to the naming convention or your design. Simply type:
-```bash
-nano .bashrc
-```
-into the terminal of the RPi and add at the bottom of the prior ```export``` options a new variable. Our RPis are assigned to its own operant box and therefore is named as such, so for example:
-```bash
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
-export REMOTE=georgelab@10.1.1.243 #The username@ip.address of the remote controller. If you are using the provided netplan and dhcpd.conf files, this IP address will be correct. 
-export REMOTEPASS=$(cat ~/.pass_file) #use the makePassFile.sh script to make a hidden password file for the remote location
-export REMOTELOGPATH='$HOME/RPi_SessionLogs' #path on remote to save IP address connection logs to
-export REMOTEVIDPATH='/$HOME/RPi_Videos' #path on remote to save videos to
-export BOX= Box11
-```
-### Additions and Remarks to Fetching and Deleting Content	
-The ```transferVideo.sh``` file, which as seen above we named ```send.sh``` (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/send.sh)), was useful tool if we needed videos from all or one RPi. But we felt that creating one that was utilized from the remote itself was beneficial as well and would have the long form of the ```scp``` code embedded in it, asking for only the RPi’s IP address as an argument that we named ```fetch.sh``` (found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/remote_codes/fetch.sh)) as the example and image below.
-```bash
-./fetch.sh 10.1.1.55
-```
-![fetch sh_image](https://github.com/George-LabX/raspicluster/assets/134438857/8c48e848-165e-4b37-a8e3-c81262e4e2ea)
-
-This allowed transferring of video from the one RPi that may have not sent a video due to a conncetion loss or if we wanted to acquire a video for whatever reason without cluttering our space with unnecessary transfers. This was done by creating a text file and changing its mode into one that is executable.
+and this will remove any and all files ending in mp4, or simply type in the exact name of the file you wish to remove.
 
 #
 ## Issues with Embedded Variables 
