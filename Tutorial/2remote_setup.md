@@ -1,17 +1,17 @@
 # Remote Control Setup
-#### In this tutorial, "remote" will be refering to the PC acting as a controller for the setup.
+#### In this tutorial, "remote" will be refering to the AWOW mini PC controlling the setup and Raspberry Pis (RPis).
 #
-Now that the RPis have been built, Ubuntu partitioned on your remote device, and SD Cards flashed with the OS system, the next step is programming the remote itself. The following procedure has been adapted from the [GitHub](https://github.com/alexcwsmith/PiRATeMC/tree/master/networking) mentioned in [Centanni and Smith (2023)](https://www.sciencedirect.com/science/article/pii/S2772392523000512), with a few steps we included for user accessibility as they were not intuitive during our setup nor referenced. 
+Now that the RPis have been built, Ubuntu partitioned on your remote, and SD Cards flashed with the OS system, the next step is programming the remote itself. The following procedure has been adapted from the [GitHub](https://github.com/alexcwsmith/PiRATeMC/tree/master/networking) mentioned in [Centanni and Smith (2023)](https://www.sciencedirect.com/science/article/pii/S2772392523000512), with a few steps we included for user accessibility as they were not intuitive during our setup. 
 
 
-The first thing to do is to find a location that is best centralized or suited for your design to place the Cisco Catalyst 3650 (or other switchboard) and plug it into a power outlet and wait about five minutes for it to boot itself up with no lights blinking on the front left panel, then connect the remote to the switch by ethernet to one of its front ports. Log into your Ubuntu machine and open the Terminal application by finding the icon or by pressing “ctrl+alt+T” and install the necessary packages:
+The first thing to do is to find a location that is best centralized or suited for your design to place the Cisco Catalyst 3650 (or other switchboard) and plug it into a power outlet and wait about five minutes for it to boot itself up with no lights blinking on the front panel. Once done, connect the remote to the switch by ethernet to one of its 24 front ports. Log into your Ubuntu machine and open the Terminal application by finding the icon or by pressing “ctrl+alt+T” and install the necessary packages with this code block:
 ```bash
 sudo apt install openssh-server
 sudo apt install isc-dhcp-server
 sudo apt install bind9
 sudo apt install clusterssh
 ```
-Once done, click the links below that can be found in the [prog_files](https://github.com/George-LabX/raspicluster/tree/main/prog_files) folder that will take you to the respective codes on the GitHub site, then copy and paste them into a Text Editor file:
+Once done, click the links below that can be found in the [prog_files](https://github.com/George-LabX/raspicluster/tree/main/prog_files) folder that will take you to the respective codes on this GitHub site, then either copy and paste them into a Text Editor file or download them:
 
 [01-network-manager-all.yaml](https://github.com/George-LabX/raspicluster/blob/main/prog_files/01-network-manager-all.yaml)  
 [dhcpd.conf](https://github.com/George-LabX/raspicluster/blob/main/prog_files/dhcpd.conf)  
@@ -46,7 +46,7 @@ sudo nano /etc/netplan/*.yaml
 to fix the errors, typically a word spelled wrong or indention issues.  
 
 A simple short hand is pressing the “up” arrow on the keyboard to repopulate the terminal line with the previous code, and can keep pressing till you find the code you are looking for.
-Next is to run the following codes that will copy the files we made earlier into portions of the remote that will allow us to connect to the switch and access the RPis over a secure shell (ssh) and and a cluster secure shell (cssh). NOTE: If you set up the network plan differently than then template (enp1 = institution, enp2 = switch) then you need to edit the isc-dhcp-server file we made previously to be to the ethernet port you have assisgned for the switch at the very bottom. This file is set up for enp1 port.
+Next is to run the following codes that will copy the files we made earlier into portions of the remote that will allow us to connect to the switch and access the RPis over a secure shell (ssh) and a cluster secure shell (cssh). NOTE: If you set up the network plan differently than then template (enp1 = institution, enp2 = switch) then you need to edit the isc-dhcp-server file we made previously to be to the ethernet port you have assisgned for the switch at the very bottom. This file is set up for enp1 port.
 ```bash
 sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
 sudo cp isc-dhcp-server /etc/default/isc-dhcp-server 
@@ -57,7 +57,7 @@ For this last code, if you haven't created a directory bind9 in the /etc directo
 ```bash
 cd /etc                                                    # changes directory to /etc
 sudo mkdir bind9                                           # creates bind9 directory for you to copy file into
-cd
+cd                                                         # return to home
 sudo cp named.conf.options /etc/bind9/named.conf.options   # copies file into directory
 ```      
 And lastly, we turn on the necessary applications to access the switch:
@@ -65,7 +65,7 @@ And lastly, we turn on the necessary applications to access the switch:
 sudo systemctl start isc-dhcp-server
 sudo systemctl start bind9
 ```
-Now, restart the AWOW remote to enact all the changes and connect to the switchboard. Plug in an RPi that has been built and the SD card flashed with the OS system you wish to use, wait about 30-60secs for the RPi to boot, then type:
+Now, restart the AWOW remote to enact all the changes and connect to the switchboard. Plug in an RPi that has been built and the SD card flashed with the OS system you wish to use, wait about 30-60secs for the RPi to boot where the red light indicates power and green light indicates OS, then type:
 ```bash
 dhcp-lease-list
 ```
