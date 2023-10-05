@@ -1,12 +1,12 @@
 # Ubuntu Installation
 
-Our lab is split into four rows of chambers and therefore each contained one AWOW mini PC to act as a remote controller that had the latest version of Ubuntu installed via USB drive. 
+Our lab is split into four rows of operant chambers and therefore each contains one AWOW mini PC to act as a remote controller with the latest version of Ubuntu installed via USB drive. 
 
-As [Centanni and Smith (2023)](https://www.sciencedirect.com/science/article/pii/S2772392523000512) state, the Raspberry Pies use Raspbian, a Linux operating system, and although it can be used on Windows with some modifications and the AWOW PCs we used already come with Windows 10, we chose to partition and install a partition of Ubuntu, a Linux operating system, to interface smoothly with the Raspbian system. 
+As [Centanni and Smith (2023)](https://www.sciencedirect.com/science/article/pii/S2772392523000512) state, the Raspberry Pies use Raspbian, a Linux operating system, and although it can be used on Windows with some modifications and the AWOW PCs we used already come with Windows 10, we chose to install a partition of Ubuntu, a Linux operating system to interface smoothly with the Raspbian system. 
 
 This can be done with a USB drive with 4GB or more of storage space, searching for “Ubuntu USB installation Rufus" in the internet browser of your choice to find the page at this link [here](https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview) on the Ubuntu website.
 
-This will walk one through creating a bootable image on the USB to install Ubuntu on the AWOW PC utilizing Rufus, a free open source USB writing tool.
+This will walk one through creating a bootable image on the USB to install Ubuntu on the AWOW PC utilizing Rufus, a free and simple open source USB writing tool.
 
 #
 
