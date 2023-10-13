@@ -1,0 +1,16 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+export MINI=""                                                       # Make mini PC leter, e.g. B
+export BOX=""                                                        # Make Box number, e.g. Box08
+export REMOTE=georgelab@10.1.1.243                                   # Mini's host name
+export REMOTEPASS="georgelab1"                                       # Password to mini
+export REMOTELOGPATH='$HOME/RPi_SessionLogs'                         # Path on remote to save IP address connection logs to
+export REMOTEVIDPATH='/media/georgelab/Expansion1/RPi_Videos_'$MINI  # Video path on mini to save videos to
