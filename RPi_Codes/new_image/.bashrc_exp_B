@@ -8,7 +8,7 @@ case $- in
       *) return;;
 esac
 
-export MINI=""                                                      # Make mini PC leter, e.g. B
+export MINI="B"                                                      # Make mini PC leter, e.g. B
 export BOX=""                                                   # Make Box number, e.g. Box08
 export REMOTE=georgelab@10.1.1.243                                   # Mini's host name
 export REMOTEPASS="georgelab1"                                       # Password to mini
