@@ -1,0 +1,601 @@
+---
+title: "rpi_final_paper"
+output: html_document
+date: "2023-09-03"
+---
+# Establish data
+
+1. Load in libraries and data
+2. Create working data sets
+3. Set Colors
+4. Normality and Homogeneity Tests
+5. Analyses x Session
+6. Analyses x Time
+7. Analyses x Model
+8. Luminance (Y) Graphs
+
+
+```{r setup, include = TRUE, echo = TRUE}
+
+# Load in libraries
+
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(ggfortify)
+library(rstatix)
+library(corrplot)
+library(tidyr)
+library(report)
+library(ggpubr)
+
+
+
+# Load in data
+full_set = read_xlsx("rpi_master.xlsx")
+
+# Preserve original, make workable data sets
+rpi = full_set[ ,c(1:5,10,12,14:29)]
+rpi$session <- factor(rpi$session)
+rpi_1hr_05 = rpi[1:5, ]
+rpi_1hr_10 = rpi[6:15, ]
+rpi_2hr_10 = rpi[16:25, ]
+rpi_2hr_15 = rpi[26:40, ]
+rpi_2hr = rpi[16:40, ]
+rpi_model = rpi[1:15, ]
+rpi_luminance = read_xlsx("light_exp.xlsx")
+
+# Colors
+time_colors = c("#2C7FB8", "#C51B89")
+
+
+# Standard Error of Mean Function
+mean_se <- function(x) {
+  se <- sd(x) / sqrt(length(x))
+  return(se)
+}
+
+
+# Standard Error of Mean by Group Function
+mean_sem <- function(data, x, group) {
+  result <- data %>%
+    group_by(.data[[group]]) %>%
+    summarise(mean_se(.data[[x]]))
+  
+  print(result)
+}
+
+# Standard Error of Median Function
+msem <- function(data, x) {
+  result <- data %>%
+    summarise(1.2533 * mean_se(.data[[x]]))
+  
+  print(result)
+}
+
+
+# Standard Error of Median by Group Function
+msem_group <- function(data, x, group) {
+  result <- data %>%
+    group_by(.data[[group]]) %>%
+    summarise(1.2533 * mean_se(.data[[x]]))
+  
+  print(result)
+}
+
+```
+
+
+
+
+## QQ Plots for Normality
+
+
+```{r QQ}
+
+# Function to generate QQ plots
+
+generate_qq_plot <- function(data, variable, main_title) {
+  ggplot(data, aes(sample = .data[[variable]])) +
+    theme_classic() +
+    geom_qq() +
+    geom_qq_line() +
+    labs(title = main_title)
+}
+
+
+# QQ plots of each variable
+
+individual_plots_list <- list(
+  generate_qq_plot(rpi, "convert_secs", "Convert QQ Plot"),
+  generate_qq_plot(rpi, "trans_secs", "Trans QQ Plot"),
+  generate_qq_plot(rpi, "process_secs", "Process QQ Plot"),
+  generate_qq_plot(rpi, "IFIV", "IFIV QQ Plot"),
+  generate_qq_plot(rpi, "SSIM", "SSIM QQ Plot"),
+  generate_qq_plot(rpi, "PSNR", "PSNR QQ Plot"),
+  generate_qq_plot(rpi, "VMAF", "VMAF QQ Plot"),
+  generate_qq_plot(rpi, "light_frame", "Light Frame QQ Plot"),
+  generate_qq_plot(rpi, "light_secs", "Light Frame (secs) QQ Plot")
+)
+
+
+# Function to generate QQ plots
+generate_qq_plots <- function(data, variable, group_factor, main_title) {
+  ggplot(data, aes(sample = .data[[variable]])) +
+    theme_classic() +
+    geom_qq() +
+    geom_qq_line() +
+    facet_wrap(as.formula(paste("~", group_factor)), scales = "free") +
+    labs(title = main_title)
+}
+
+
+# QQ plots for each variable grouped by Session, Time, and Model
+
+grouped_plots_list <- list(
+
+  # Grouped by Time
+  generate_qq_plots(rpi, "convert_secs", "time", "Convert QQ Plot (Grouped by Time)"),
+  generate_qq_plots(rpi, "trans_secs", "time", "Trans QQ Plot (Grouped by Time)"),
+  generate_qq_plots(rpi, "process_secs", "time", "Process QQ Plot (Grouped by Time)"),
+  generate_qq_plots(rpi, "IFIV", "time", "IFIV QQ Plot (Grouped by Time)"),
+  generate_qq_plots(rpi, "SSIM", "time", "SSIM QQ Plot (Grouped by Time)"),
+  generate_qq_plots(rpi, "PSNR", "time", "PSNR QQ Plot (Grouped by Time)"),
+  generate_qq_plots(rpi, "VMAF", "time", "VMAF QQ Plot (Grouped by Time)"),
+  generate_qq_plots(rpi, "light_frame", "time", "Light Frame QQ Plot (Grouped by Time)"),
+  generate_qq_plots(rpi, "light_secs", "time", "Light Frame (secs) QQ Plot (Grouped by Time)"),
+  
+  # Grouped by Pi Model
+  generate_qq_plots(rpi_model, "convert_secs", "pi_model", "Convert QQ Plot (Grouped by Pi Model)"),
+  generate_qq_plots(rpi_model, "trans_secs", "pi_model", "Trans QQ Plot (Grouped by Pi Model)"),
+  generate_qq_plots(rpi_model, "process_secs", "pi_model", "Process QQ Plot (Grouped by Pi Model)"),
+  generate_qq_plots(rpi_model, "IFIV", "pi_model", "IFIV QQ Plot (Grouped by Pi Model)"),
+  generate_qq_plots(rpi_model, "SSIM", "pi_model", "SSIM QQ Plot (Grouped by Pi Model)"),
+  generate_qq_plots(rpi_model, "PSNR", "pi_model", "PSNR QQ Plot (Grouped by Pi Model)"),
+  generate_qq_plots(rpi_model, "VMAF", "pi_model", "VMAF QQ Plot (Grouped by Pi Model)"),
+  generate_qq_plots(rpi_model, "light_frame", "pi_model", "Light Frame QQ Plot (Grouped by Pi Model)"),
+  generate_qq_plots(rpi_model, "light_secs", "pi_model", "Light Frame (secs) QQ Plot (Grouped by Pi Model)")
+
+)
+
+
+# Print lists
+print(individual_plots_list)
+print(grouped_plots_list)
+
+```
+
+
+
+
+# Shapiro Normalcy
+
+
+```{r shapiro}
+
+# All
+shapiro.test(rpi$convert_secs)
+shapiro.test(rpi$trans_secs)
+shapiro.test(rpi$process_secs)
+shapiro.test(rpi$IFIV)
+shapiro.test(rpi$SSIM)
+shapiro.test(rpi$PSNR)
+shapiro.test(rpi$VMAF)
+shapiro.test(rpi$light_frame)
+shapiro.test(rpi$light_secs)
+
+# 1hr_05
+shapiro.test(rpi_1hr_05$convert_secs)
+shapiro.test(rpi_1hr_05$trans_secs)
+shapiro.test(rpi_1hr_05$process_secs)
+shapiro.test(rpi_1hr_05$IFIV)
+shapiro.test(rpi_1hr_05$SSIM)
+shapiro.test(rpi_1hr_05$PSNR)
+shapiro.test(rpi_1hr_05$VMAF)
+shapiro.test(rpi_1hr_05$light_frame)
+shapiro.test(rpi_1hr_05$light_secs)
+
+# 2HR Session
+shapiro.test(rpi_2hr$convert_secs)
+shapiro.test(rpi_2hr$trans_secs)
+shapiro.test(rpi_2hr$process_secs)
+# shapiro.test(rpi_2hr$IFIV) ; All results identical
+shapiro.test(rpi_2hr$SSIM)
+shapiro.test(rpi_2hr$PSNR)
+shapiro.test(rpi_2hr$VMAF)
+shapiro.test(rpi_2hr$light_frame)
+shapiro.test(rpi_2hr$light_secs)
+
+# 1HR Session and Pi_model
+shapiro.test(rpi_model$convert_secs)
+shapiro.test(rpi_model$trans_secs)
+shapiro.test(rpi_model$process_secs)
+shapiro.test(rpi_model$IFIV)
+shapiro.test(rpi_model$SSIM)
+shapiro.test(rpi_model$PSNR)
+shapiro.test(rpi_model$VMAF)
+shapiro.test(rpi_model$light_frame)
+shapiro.test(rpi_model$light_secs)
+
+
+
+```
+
+
+
+
+# Levene
+
+
+```{r Levene}
+
+# Levene Tests by time
+levene_test(rpi, convert_secs ~ time)
+levene_test(rpi, trans_secs ~ time)
+levene_test(rpi, process_secs ~ time)
+levene_test(rpi, IFIV ~ time)
+levene_test(rpi, SSIM ~ time)
+levene_test(rpi, PSNR ~ time)
+levene_test(rpi, VMAF ~ time)
+levene_test(rpi, light_frame ~ time)
+levene_test(rpi, light_secs ~ time)
+
+# Levene Tests by pi_model
+levene_test(rpi_model, convert_secs ~ pi_model)
+levene_test(rpi_model, trans_secs ~ pi_model)
+levene_test(rpi_model, process_secs ~ pi_model)
+levene_test(rpi_model, IFIV ~ pi_model)
+levene_test(rpi_model, SSIM ~ pi_model)
+levene_test(rpi_model, PSNR ~ pi_model)
+levene_test(rpi_model, VMAF ~ pi_model)
+levene_test(rpi_model, light_frame ~ pi_model)
+levene_test(rpi_model, light_secs ~ pi_model)
+
+```
+
+
+
+
+# Descriptives
+
+
+```{r Descriptives}
+
+msem(rpi, "convert_secs")
+msem(rpi, "trans_secs")
+msem(rpi, "process_secs")
+msem(rpi, "full_secs")
+msem(rpi, "IFIV")
+mean_se(rpi$SSIM)
+mean_se(rpi$PSNR)
+mean_se(rpi$VMAF)
+mean_se(rpi$light_frame)
+mean_se(rpi$light_secs)
+
+
+
+```
+
+
+# Fidelity CoV
+
+
+```{r Cov}
+
+
+ssim_cov = ((sd(rpi$SSIM))/(mean(rpi$SSIM))) * 100
+print(ssim_cov)
+vmaf_cov = ((sd(rpi$VMAF))/(mean(rpi$VMAF))) * 100
+print(vmaf_cov)
+psnr_cov = ((sd(rpi$PSNR))/(mean(rpi$PSNR))) * 100
+print(psnr_cov)
+
+```
+
+
+# Statistics by time
+
+
+```{r time}
+
+# convert_secs
+time_conv_wil = wilcox_test(rpi, convert_secs ~ time)
+print(time_conv_wil)
+time_conv = as.data.frame(time_conv_wil) %>%
+  mutate(p.signif = ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ""))))
+wilcox_effsize(rpi, convert_secs ~ time)
+msem_group(rpi, "convert_secs", "time")
+
+## Plot
+time_conv_box = ggplot(rpi, aes(x = time, y = convert_secs, color = time)) + 
+  geom_boxplot(size=0.75, show.legend = FALSE) +
+  labs(subtitle = "Conversion Time") +
+  theme_classic() +
+  geom_jitter(size = 2, position=position_jitter(0.08), show.legend = FALSE) +
+  theme(axis.title.x = element_blank()) +
+  ylab("Time in Seconds") + 
+  scale_color_manual(values = time_colors) +
+  coord_cartesian(ylim = c(0,330)) +
+  stat_pvalue_manual(time_conv, label = "p.signif", y.position = 300, size = 6.25, hide.ns = TRUE)
+print(time_conv_box)
+
+
+
+# trans_secs
+time_trans_wil = wilcox_test(rpi, trans_secs ~ time)
+print(time_trans_wil)
+time_trans = as.data.frame(time_trans_wil) %>%
+  mutate(p.signif = ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ""))))
+wilcox_effsize(rpi, trans_secs ~ time)
+msem_group(rpi, "trans_secs", "time")
+
+## Plot
+time_trans_box = ggplot(rpi, aes(x = time, y = trans_secs, color = time)) + 
+  geom_boxplot(size=0.75, show.legend = FALSE) +
+  theme_classic() +
+  labs(subtitle = "Transfer Time") +
+  geom_jitter(size = 2, position=position_jitter(0.08), show.legend = FALSE) +
+  theme(axis.title.x = element_blank()) +
+  theme(axis.title.y = element_blank()) +
+  scale_color_manual(values = time_colors) +
+  coord_cartesian(ylim = c(0,330)) +
+  stat_pvalue_manual(time_trans, label = "p.signif", y.position = 320, size = 6.25, hide.ns = TRUE)
+print(time_trans_box)
+
+
+
+# process_secs
+time_proc_wil = wilcox_test(rpi, process_secs ~ time)
+print(time_proc_wil)
+time_proc = as.data.frame(time_proc_wil) %>%
+  mutate(p.signif = ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ""))))
+wilcox_effsize(rpi, process_secs ~ time)
+msem_group(rpi, "process_secs", "time")
+
+## Plot
+time_proc_box = ggplot(rpi, aes(x = time, y = process_secs, color = time)) + 
+  geom_boxplot(size=0.75) +
+  theme_classic() +
+  labs(subtitle = "Process Time") +
+  geom_jitter(size = 2, position=position_jitter(0.08)) +
+  theme(axis.title.x = element_blank()) +
+  ylab("Time in Seconds") +
+  scale_color_manual(values = time_colors) +
+  coord_cartesian(ylim = c(0,600)) +
+  stat_pvalue_manual(time_proc, label = "p.signif", y.position = 595, size = 6.25, hide.ns = TRUE)
+print(time_proc_box)
+
+
+# 3-Plot
+tpt = grid.arrange(grid.arrange(time_conv_box, time_trans_box, ncol=2), time_proc_box, nrow=2)
+ggsave(filename = "tpt_plot.png", plot=tpt)
+
+
+
+# IFIV 
+time_ifiv_wil = wilcox_test(rpi, IFIV ~ time)
+print(time_ifiv_wil)
+
+
+# SSIM
+time_ssim_wil = wilcox_test(rpi, SSIM ~ time)
+print(time_ssim_wil)
+msem_group(rpi, "SSIM", "time")
+
+
+# PSNR
+time_psnr_wil = wilcox_test(rpi, PSNR ~ time)
+print(time_psnr_wil)
+msem_group(rpi, "PSNR", "time")
+
+
+# VMAF
+time_vmaf_wil = wilcox_test(rpi, VMAF ~ time)
+print(time_vmaf_wil)
+msem_group(rpi, "VMAF", "time")
+
+
+# light_frame
+time_light_frame_wil = wilcox_test(rpi, light_frame ~ time)
+print(time_light_frame_wil)
+msem_group(rpi, "light_frame", "time")
+
+
+# light_secs"
+time_light_secs_wil = wilcox_test(rpi, light_secs ~ time)
+print(time_light_secs_wil)
+msem_group(rpi, "light_secs", "time")
+
+
+```
+
+
+# Statistics by Model
+
+
+```{r model}
+
+# convert_secs
+model_conv_wil = wilcox_test(rpi_model, convert_secs ~ pi_model)
+print(model_conv_wil)
+model_conv = as.data.frame(model_conv_wil) %>%
+  mutate(p.signif = ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ""))))
+wilcox_effsize(rpi_model, convert_secs ~ pi_model)
+msem_group(rpi, "convert_secs", "pi_model")
+
+## Plot
+model_conv_box = ggplot(rpi_model, aes(x = pi_model, y = convert_secs, color = pi_model)) + 
+  geom_boxplot(size=0.75, show.legend = FALSE) +
+  theme_classic() +
+  labs(subtitle = "Conversion Time") +
+  geom_jitter(size = 2, position=position_jitter(0.08), show.legend = FALSE) +
+  theme(axis.title.x = element_blank()) +
+  ylab("Time in Seconds") +
+  scale_color_manual(values = c("forestgreen", "tan")) +
+  coord_cartesian(ylim = c(0,140)) +
+  stat_pvalue_manual(model_conv, label = "p.signif", y.position = 135, size = 6.25)
+print(model_conv_box)
+
+
+
+
+# trans_secs
+model_trans_t = t_test(rpi_model, trans_secs ~ pi_model)
+print(model_trans_t)
+model_trans = as.data.frame(model_trans_t) %>%
+  mutate(p.signif = ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ""))))
+mean_sem(rpi, "trans_secs", "pi_model")
+
+## Plot
+model_trans_box = ggplot(rpi_model, aes(x = pi_model, y = trans_secs, color = pi_model)) + 
+  geom_boxplot(size=0.75) +
+  theme_classic() +
+  labs(subtitle = "Transfer Time") +
+  geom_jitter(size = 2, position=position_jitter(0.08)) +
+  theme(axis.title.x = element_blank()) +
+  theme(legend.position = c(0.8,0.9))+
+  theme(axis.title.y = element_blank()) +
+  scale_color_manual(values = c("forestgreen", "tan")) +
+  coord_cartesian(ylim = c(0,135)) +
+  stat_pvalue_manual(model_trans, label = "p.signif", y.position = 70, size = 6.25)
+print(model_trans_box)
+
+
+
+# Model Throughput Graph
+tpm = grid.arrange(model_conv_box, model_trans_box, ncol=2)
+ggsave(filename = "tpm_plot.png", plot=tpm)
+
+
+
+# process_secs
+model_proc_wil = wilcox_test(rpi_model, process_secs ~ pi_model)
+print(model_proc_wil)
+msem_group(rpi, "process_secs", "pi_model")
+
+
+# IFIV 
+model_ifiv_wil = wilcox_test(rpi_model, IFIV ~ pi_model)
+print(model_ifiv_wil)
+
+
+# SSIM
+model_ssim_wil = wilcox_test(rpi_model, SSIM ~ pi_model)
+print(model_ssim_wil)
+msem_group(rpi, "SSIM", "pi_model")
+
+
+# PSNR
+model_psnr_wil = wilcox_test(rpi_model, PSNR ~ pi_model)
+print(model_psnr_wil)
+model_psnr = as.data.frame(model_psnr_wil) %>%
+  mutate(p.signif = ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ""))))
+wilcox_effsize(rpi_model, PSNR ~ pi_model)
+msem_group(rpi, "PSNR", "pi_model")
+
+# Plot
+model_psnr_box = ggplot(rpi_model, aes(x = pi_model, y = PSNR, color = pi_model)) + 
+  geom_boxplot(size=0.75) +
+  theme_classic() +
+  geom_jitter(size = 2, position=position_jitter(0.08)) +
+  xlab("Raspberry Pi Model") + 
+  ylab("Peak Signal-to-Noise Ratio (PSNR)") +
+  scale_color_manual(values = c("forestgreen", "tan")) + 
+  coord_cartesian(ylim = c(35,50)) +
+  stat_pvalue_manual(model_psnr, label = "p.signif", y.position = 49, size = 6.25)
+print(model_psnr_box)
+ggsave(filename = "model_psnr_box.jpeg", plot = model_psnr_box)
+
+
+
+# VMAF
+model_vmaf_wil = wilcox_test(rpi_model, VMAF ~ pi_model)
+print(model_vmaf_wil)
+msem_group(rpi, "VMAF", "pi_model")
+
+
+# light_frame
+model_light_frame_wil = wilcox_test(rpi_model, light_frame ~ pi_model)
+print(model_light_frame_wil)
+model_light_frame = as.data.frame(model_light_frame_wil) %>%
+  mutate(p.signif = ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ""))))
+wilcox_effsize(rpi_model, light_frame ~ pi_model)
+msem_group(rpi, "light_frame", "pi_model")
+
+# Plot
+model_light_frame_box = ggplot(rpi_model, aes(x = pi_model, y = light_frame, color = pi_model)) + 
+  geom_boxplot(size=0.75, show.legend = FALSE) +
+  theme_classic() +
+  labs(subtitle = "Light Event Frame") +
+  geom_jitter(size = 2, position=position_jitter(0.08), show.legend = FALSE) +
+  theme(axis.title.x = element_blank()) + 
+  ylab("Frame Number") +
+  scale_color_manual(values = c("forestgreen", "tan")) + 
+  coord_cartesian(ylim = c(170,190)) +
+  stat_pvalue_manual(model_light_frame, label = "p.signif", y.position = 187, size = 6.25)
+print(model_light_frame_box)
+
+
+# light_secs
+model_light_secs_wil = wilcox_test(rpi_model, light_secs ~ pi_model)
+print(model_light_secs_wil)
+model_light_secs = as.data.frame(model_light_secs_wil) %>%
+  mutate(p.signif = ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ""))))
+wilcox_effsize(rpi_model, light_secs ~ pi_model)
+msem_group(rpi, "light_secs", "pi_model")
+
+# Plot
+model_light_secs_box = ggplot(rpi_model, aes(x = pi_model, y = light_secs, color = pi_model)) + 
+  geom_boxplot(size=0.75) +
+  theme_classic() +
+  theme(legend.position = c(0.9,0.83)) +
+  labs(subtitle = "Light Event Timestamp") +
+  geom_jitter(size = 2, position=position_jitter(0.08)) +
+  theme(axis.title.x = element_blank()) + 
+  ylab("Seconds") +
+  scale_color_manual(values = c("forestgreen", "tan")) + 
+  stat_pvalue_manual(model_light_secs, label = "p.signif", y.position = 6.25, size = 6.25)
+print(model_light_secs_box)
+
+
+
+model_lights = grid.arrange(model_light_frame_box, model_light_secs_box, ncol=2)
+ggsave(filename = "model_lights.png", plot = model_lights)
+
+
+```
+
+
+# Light Event SSIM Luminance (Y) Graph
+
+
+```{r Luminance}
+
+# Full Scale
+lum_full_plot = ggplot(rpi_luminance, aes(x = Frame, y = Y_Score)) + 
+  geom_line(linewidth = 2, color = "yellow") +
+  theme_classic() +
+  geom_jitter() +
+  theme(axis.title.x = element_blank()) + 
+  ylab("Luminance (Y) Score") +
+  scale_x_continuous(breaks = seq(160, 250, by = 10))
+print(lum_full_plot)
+
+
+
+# Light Event
+lum_event_plot = ggplot(rpi_luminance, aes(x = Frame, y = Y_Score)) + 
+  geom_line(linewidth = 2, color = "yellow") +
+  theme_classic() +
+  geom_jitter() +
+  coord_cartesian(ylim = c(0.53,0.5455)) +
+  theme(axis.title.x = element_blank()) +
+  theme(axis.title.y = element_blank()) +
+  scale_x_continuous(breaks = seq(160, 250, by = 10))
+print(lum_event_plot)
+
+event = grid.arrange(lum_full_plot, lum_event_plot, ncol=2)
+ggsave(filename = "event.png", plot = event)
+
+```
