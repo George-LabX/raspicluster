@@ -7,7 +7,7 @@ file=${BOX}_${now}
 
 # Recording Script
 echo "Started recording at:" $(date +%H:%M:%S)
-raspivid -t $ans -br 55 -w 1280 -h 720 --framerate $3 -b 20000000 -awb greyworld -o $1_$file.h264
+raspivid -t $ans -br 55 -w 800 -h 600 --framerate $3 -b 20000000 -awb greyworld -o $1_$file.h264
 echo -e "\n"
 
 # MP4 Conversion using MP4Box
@@ -17,7 +17,7 @@ echo -e "\n"
 
 # FFmpeg "resizing" processing
 echo "FFmpeg processing started at:" $(date +%H:%M:%S)
-ffmpeg -i $1_j$file.mp4 -vf "scale=1280:720" -loglevel panic $1_$file.mp4
+ffmpeg -i $1_j$file.mp4 -vf "scale=800:600" -loglevel panic $1_$file.mp4
 echo -e "\n"
 
 # Secure copy recording file to remote device
