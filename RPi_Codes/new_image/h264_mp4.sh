@@ -1,4 +1,7 @@
 #!/bin/bash
+# This code is for instances where recordings were disrupted in some way that resulted in only H.264 files.
+# This will take in the directory of the videos and convert them to mp4 using MP4Box, 
+# then run them through ffmpeg.
 
 # Input folder containing H.264 files
 input_folder="/media/george/Expansion/RPi_Videos_B"
