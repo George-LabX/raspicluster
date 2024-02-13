@@ -1,6 +1,8 @@
 #!/bin/bash
+# Given a directory location, this code will populate said area 
+# with the folders corresponding to the common session of a Oxycodone cohort
 
-cd /media/george/Expansion/RPi_Videos_B/Coc_B
+cd /media/george/Expansion/RPi_Videos_B/Oxy_B
 
 # Create LGA directories
 for i in {1..15}; do
