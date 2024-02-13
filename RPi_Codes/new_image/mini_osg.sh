@@ -1,4 +1,6 @@
 #!/bin/bash
+# This code is to transfer video files form a Mini PC to the Super PC.
+# It takes in 3 arguments as follows:
 
 # 1 = Drug, i.e. "Coc"
 # 2 = Cohort, i.e. "C24"
