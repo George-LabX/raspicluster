@@ -1,4 +1,6 @@
 #!/bin/bash
+# Given a directory location, this code will populate said area 
+# with the folders corresponding to the common session of a Cocaine cohort
 
 cd /media/george/Expansion/RPi_Videos_B/Coc_B
 
