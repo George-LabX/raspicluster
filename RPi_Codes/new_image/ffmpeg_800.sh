@@ -1,4 +1,9 @@
 #!/bin/bash
+# For videos shot in 800x600 resolution
+# This code takes in a directory corresponding to a cohort,
+# it will then enter each subdirectory (sessions) and use ffmpeg
+# to set frame rates to 30 and "resize" the video using ffmpeg, 
+# which lowers bits and thereby video file size.
 
 # Specify the input directory containing subdirectories
 input_directory="/media/george/Expansion/RPi_Videos_B/Oxy_B/Past_Cohorts/C20_Oxy_B"
