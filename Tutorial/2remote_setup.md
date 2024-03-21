@@ -52,7 +52,7 @@ sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
 sudo cp isc-dhcp-server /etc/default/isc-dhcp-server       
 sudo cp named.conf.options /etc/bind9/named.conf.options
 ```
-For this last code, if you haven't created a directory bind9 in the /etc directory it will give an error. This can be fixed as follows:
+For this last code, if your PC does not have a bind9 directory in the /etc directory it will give an error. This can be fixed as follows:
 ```bash
 cd /etc                                                    # changes directory to /etc
 sudo mkdir bind9                                           # creates bind9 directory for you to copy file into
