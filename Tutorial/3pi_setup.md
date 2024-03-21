@@ -22,7 +22,7 @@ And what you should see is the image below:
 
 ![recordVideo sh_image](https://github.com/George-LabX/raspicluster/assets/134438857/a4b45f60-b4ea-43ad-b761-9bab2419ef3b)
 
-What you will change is the brightness ```-br 55```, width of the resolution ```-w 800```, and the height of the resolution ```-h 600``` in line 3, as well as adding the name (or convention of your design choice) of this RPi to the outputs, so if it is the first box in your design it will be ```$1_Box01_$now.h264```. The variables ```$REMOTEPASS```, ```$REMOTE```, and ```$REMOTEVIDPATH``` can be changed to your PC's password, name, and location of where the videos are to be saved, or can change them in the next section. We encountered issues with these variables and changed them as such. Once done, ctrl+x will exit, then follow the prompts to save. Note that in this recording file you can adjust the parameters to fit whatever configuration works best for your organization. The code filled out as such can be found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/recordVideo.sh).  
+What you will change is the brightness ```-br 55```, width of the resolution ```-w 800```, and the height of the resolution ```-h 600``` in line 3, as well as adding the name (or convention of your design choice) of this RPi to the outputs, so if it is the first box in your design it will be ```$1_Box01_$now.h264```. The variables ```$REMOTEPASS```, ```$REMOTE```, and ```$REMOTEVIDPATH``` can be changed to your PC's password, name, and location of where the videos are to be saved, or can change them in the next section. Once done, ctrl+x will exit, then follow the prompts to save. Note that in this recording file you can adjust the parameters to fit whatever configuration works best for your organization. The code filled out as such can be found [here](https://github.com/George-LabX/raspicluster/blob/main/RPi_Codes/recordVideo.sh).  
 
 Next change the bashrc file of the RPi. Access this file by typing:
 ```bash
@@ -31,7 +31,7 @@ nano .bashrc
 ![pi_bash_image](https://github.com/George-LabX/raspicluster/assets/134438857/225808a5-b60e-476e-a02d-4cf2780de86a)
 
 The only thing one needs to change here (if one keeps the switch IP address assigned prior) is the hostname of your remote.  
-This can be found as the first "export" line ```export REMOTE=rpicam@10.1.1.243``` and change it to ```export REMOTE=yourhostname@10.1.1.243``` as seen above in the image. As mentioned in the prior section, the variables here can be either left alone if changed in the recordVideo.sh file, or one can make the changes in this section and create folders with the names "RPi_SessionLogs" and "RPi_Videos" in your home directory or device if this is the convention/path you wish to use. As mentioned, we had issues with the variables and hardcoded the executable file itself. Also, changing within the file itself allows for individuation of video paths for different specific recording files.
+This can be found as the first "export" line ```export REMOTE=rpicam@10.1.1.243``` and change it to ```export REMOTE=yourhostname@10.1.1.243``` as seen above in the image. As mentioned in the prior section, the variables here can be either left alone if changed in the recordVideo.sh file, or one can make the changes in this section and create folders with the names "RPi_SessionLogs" and "RPi_Videos" in your home directory or device if this is the convention/path you wish to use. Also, changing within the file itself allows for individuation of video paths for different specific recording files.
   
 Now in the RPi terminal, type in:
 ```bash
@@ -43,14 +43,14 @@ If you change the password and have a cluster system, it is crucial the password
 Once done, press the right arrow key twice to access “finish” and press “enter”.  
 The RPi will reset, in which case you can now plug in another RPi to allow it to boot and connect. 
 
-This last step is important for the remote itself to be able to enact the cluster secure shell (cssh) and connect to all the RPis simultaneously. 
+This last step is important for the remote itself to be able to enact the cluster secure shell (cssh) and connect to as well as recognize all the RPis simultaneously. 
 In the AWOW remote’s terminal, type:
 ```bash
 nano .bashrc 
 ```
 From here, you will add ```alias camconnect='cssh pi@10.1.1.50 …'``` as exemplified at the bottom of the picture below.  
 Notice how they are not separated by commas and that the entire code beginning with cssh is within quotes.  
-From here you can add all the RPis at one time and I have found it to be faster and not an issue, but if it is more convenient for yourself you can always add one at a time.
+From here you can add all the RPis at one time and have found it to be faster and not an issue, but if it is more convenient for yourself you can always add one at a time.
 ![mini_bash_image](https://github.com/George-LabX/raspicluster/assets/134438857/d8940123-d39f-44fa-95a4-9a75b94066a3)
 
 [next](https://github.com/George-LabX/raspicluster/blob/main/Tutorial/4using_setup.md)
