@@ -49,8 +49,7 @@ A simple short hand is pressing the “up” arrow on the keyboard to repopulate
 Next is to run the following codes that will copy the files we made earlier into portions of the remote that will allow us to connect to the switch and access the RPis over a secure shell (ssh) and a cluster secure shell (cssh). NOTE: If you set up the network plan differently than then template (enp1 = institution, enp2 = switch) then you need to edit the isc-dhcp-server file we made previously to be to the ethernet port you have assisgned for the switch at the very bottom. This file is set up for enp1 port.
 ```bash
 sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
-sudo cp isc-dhcp-server /etc/default/isc-dhcp-server 
-    # (note Centanni and Smith (2021) have this code ending with a "/", do NOT include it or it won't run)       
+sudo cp isc-dhcp-server /etc/default/isc-dhcp-server       
 sudo cp named.conf.options /etc/bind9/named.conf.options
 ```
 For this last code, if you haven't created a directory bind9 in the /etc directory it will give an error. This can be fixed as follows:
