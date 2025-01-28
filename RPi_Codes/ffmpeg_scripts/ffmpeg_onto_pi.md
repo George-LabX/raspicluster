@@ -1,7 +1,7 @@
 # How to put a static FFmpeg build onto a headless and internetless Raspberry Pi and accessible Pi-wide
 
 ## Step 1. 
-Go to https://johnvansickle.com/ffmpeg/ found on the FFmpeg website and download the latest static build and put it in your remote's home directory. This particular tutorial is using ffmpeg-release-armhf-static.tar.xz.
+Go to https://johnvansickle.com/ffmpeg/ found on the FFmpeg website and download the latest static build and put it in your remote's home directory. This particular tutorial is using ffmpeg-release-armhf-static.tar.xz. Therefore, if a newer static package is downloaded, it will need to be changed in the codes below.
 
 ## Step 2.
 Access all Raspberry Pis with the `cssh` command line, and enter the following:
